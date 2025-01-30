@@ -11,7 +11,7 @@ import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     MongooseModule.forRoot(
-      process.env.MONGO_URI ?? 'mongodb+srv://jeremy:m.rrobot45@trend.jquci.mongodb.net/?retryWrites=true&w=majority&appName=trend',
+      process.env.MONGO_URI
     ),
     CampaignsModule,
     UsersModule,
