@@ -14,6 +14,18 @@ export class CreateCampaignDto {
 
   @IsString()
   @IsNotEmpty()
+  brand: string;
+
+  @IsString()
+  @IsNotEmpty()
+  category: string;
+
+  @IsNumber()
+  @IsNotEmpty()
+  compensation: number;
+
+  @IsString()
+  @IsNotEmpty()
   description: string;
 
   @Transform(({ value }) => new Date(value))

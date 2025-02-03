@@ -13,7 +13,16 @@ export class Campaign {
   title: string;
 
   @Prop({ required: true })
+  brand: string;
+
+  @Prop({ required: true })
   description: string;
+
+  @Prop({ required: true })
+  category: string;
+
+  @Prop({ required: true })
+  compensation: number;
 
   @Prop({ required: true })
   deadline: Date;
