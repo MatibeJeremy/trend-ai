@@ -65,4 +65,11 @@ export class CampaignsService {
     });
     return campaigns;
   }
+
+
+  async getAllCampaigns(){
+    const campaigns = this.campaignModel.find();
+
+    return campaigns;
+  }
 }

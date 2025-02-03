@@ -27,4 +27,9 @@ export class CampaignsController {
   findInfluencerCampaigns(@Param('user_id') user_id: string) {
     return this.campaignsService.fetchInfluencerCampaigns(user_id);
   }
+
+  @Get('influencer')
+  getAllCampaigns() {
+    return this.campaignsService.getAllCampaigns();
+  }
 }
