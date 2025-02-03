@@ -11,7 +11,7 @@ import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     MongooseModule.forRoot(
-      process.env.MONGO_URI || 'mongodb://localhost:27017/trends'
+      process.env.MONGO_URI
     ),
     CampaignsModule,
     UsersModule,
