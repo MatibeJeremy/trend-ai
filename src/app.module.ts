@@ -7,17 +7,19 @@ import { UsersModule } from './users/users.module';
 import { PostsModule } from './posts/posts.module';
 import { SubscriptionsModule } from './subscriptions/subscriptions.module';
 import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
     MongooseModule.forRoot(
-      process.env.MONGO_URI
+      process.env.MONGO_URI || 'mongodb://localhost:27017/trends'
     ),
     CampaignsModule,
     UsersModule,
     PostsModule,
     SubscriptionsModule,
     AuthModule,
+    ConfigModule.forRoot({isGlobal: true}),
   ],
   controllers: [AppController],
   providers: [AppService],
