@@ -12,7 +12,7 @@ import { ConfigModule } from '@nestjs/config';
 @Module({
   imports: [
     MongooseModule.forRoot(
-      process.env.MONGO_URI || 'mongodb://localhost:27017/trends'
+      process.env.MONGO_URI
     ),
     CampaignsModule,
     UsersModule,
