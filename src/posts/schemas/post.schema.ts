@@ -9,6 +9,7 @@ export enum Status {
   INACTIVE = 'INACTIVE',
   PENDING = 'PENDING',
   DELETED = 'DELETED',
+  FAILED = 'FAILED',
 }
 
 @Schema()
