@@ -7,19 +7,32 @@ import { UsersModule } from './users/users.module';
 import { PostsModule } from './posts/posts.module';
 import { SubscriptionsModule } from './subscriptions/subscriptions.module';
 import { AuthModule } from './auth/auth.module';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+
+// const databaseURI: string = `mongodb://localhost:27017/${process.env.DATABASE_NAME}`;
 
 @Module({
   imports: [
-    MongooseModule.forRoot(
-      process.env.MONGO_URI
-    ),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: './.env',
+    }),
+    MongooseModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => {
+        const uri = configService.get<string>('MONGO_URI');
+        if (!uri) {
+          throw new Error('MONGO_URI is missing from the .env file');
+        }
+        return { uri };
+      },
+    }),
+
     CampaignsModule,
     UsersModule,
     PostsModule,
     SubscriptionsModule,
     AuthModule,
-    ConfigModule.forRoot({isGlobal: true}),
   ],
   controllers: [AppController],
   providers: [AppService],
