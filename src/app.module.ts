@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CampaignsModule } from './campaigns/campaigns.module';
@@ -7,9 +7,9 @@ import { UsersModule } from './users/users.module';
 import { PostsModule } from './posts/posts.module';
 import { SubscriptionsModule } from './subscriptions/subscriptions.module';
 import { AuthModule } from './auth/auth.module';
+import { LoggerMiddleware } from './utils/logger.middleware';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
-// const databaseURI: string = `mongodb://localhost:27017/${process.env.DATABASE_NAME}`;
 
 @Module({
   imports: [
@@ -37,4 +37,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule implements NestModule{
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LoggerMiddleware).forRoutes('posts', 'users', 'campaigns', 'subscriptions');
+  }
+}
